@@ -137,7 +137,7 @@ function __challengeStatusPS1() {
 	returnCode="$?"
 	if [ "$returnCode" == "0" ]; then
 		echo -ne "$1" # green
-        echo "System is clean ! Run /usr/bin/secret ;-)"
+        echo "System is clean ! But we found a weird 'md5' binary that does not at all do what it should be doing (?)"
 	else
 		echo -ne "$2" # red
 	fi

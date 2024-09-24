@@ -4,10 +4,10 @@
 #
 
 services:
-  ada:
+  fsociety:
     build:
       context: .
-      dockerfile: ada/Dockerfile
+      dockerfile: fsociety/Dockerfile
     expose:
       - 22
       - 4200

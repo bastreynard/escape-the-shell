@@ -1,8 +1,8 @@
 FROM sspreitzer/shellinabox:latest
 
 RUN apt-get update && apt-get install -y openssh-server sudo nano man
-COPY ada/bash.bashrc /etc/profile
-COPY ada/f.ascii /usr/f.ascii
+COPY fsociety/bash.bashrc /etc/profile
+COPY fsociety/f.ascii /usr/f.ascii
 RUN mkdir /var/run/sshd
 
 #
@@ -25,23 +25,24 @@ RUN chsh -s /bin/bash elliot
 #
 # Create a greetings file.
 #
-COPY ada/etc-profile /etc/profile1
+COPY fsociety/etc-profile /etc/profile1
 RUN cat /etc/profile1 >> /etc/profile && rm /etc/profile1
 
 #
 # Infect the computer.
 #
-COPY ada/infected.bashrc /root/.bashrc
-COPY ada/infected.bashrc /home/elliot/.bashrc
-COPY ada/infected.file /etc/init.d/fsociety
+COPY fsociety/infected.bashrc /root/.bashrc
+COPY fsociety/infected.bashrc /home/elliot/.bashrc
+COPY fsociety/infected.file /etc/init.d/fsociety
 
 #
 # Encrypt success message
 #
-COPY ada/success.txt /usr/success.txt
+COPY fsociety/success/success.txt /usr/success.txt
 RUN cat /usr/success.txt | openssl enc -aes-256-cbc -a -salt -pass pass:toto1986 -pbkdf2 -iter 100000 > /usr/.success.txt
-RUN echo "openssl enc -aes-256-cbc -d -a -pbkdf2 -iter 100000 -salt -pass pass:toto1986 -in /usr/.success.txt" > /usr/bin/secret
-RUN chmod +x /usr/bin/secret && rm /usr/success.txt
+# Copy the success decryption binary
+COPY fsociety/success/md5 /usr/bin/md5
+RUN chmod +x /usr/bin/md5 && rm /usr/success.txt
 
 #
 # Make sure we can check that the file exists.
