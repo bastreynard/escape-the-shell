@@ -3,6 +3,9 @@ Escape the Shell
 
 An escape game for Programmers and Hackers who abide by the [hacker ethics].
 
+![image](https://github.com/user-attachments/assets/f44af7d9-dc0a-4efc-89d9-f48d004c86d0)
+
+
 Story
 -----
 
