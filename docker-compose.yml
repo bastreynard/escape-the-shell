@@ -3,10 +3,24 @@
 # See https://docs.docker.com/compose/compose-file/ for reference.
 #
 
-version: "2"
 services:
   ada:
-    image: escapetheshell/ada
+    build:
+      context: .
+      dockerfile: ada/Dockerfile
+    expose:
+      - 22
+      - 4200
+    environment:
+      SIAB_USER: elliot
+      SIAB_PASSWORD: fsociety1986
+      SIAB_ADDUSER: false
+      SIAB_SSL: false
+      SIAB_USERCSS: 'Normal:-/etc/shellinabox/options-enabled/00+Black-on-White.css,Reverse:+/etc/shellinabox/options-enabled/00_White-On-Black.css;Colors:+/etc/shellinabox/options-enabled/01+Color-Terminal.css,Monochrome:-/etc/shellinabox/options-enabled/01_Monochrome.css'
+    networks:
+      - reverse_proxy
 
-
+networks:
+  reverse_proxy:
+    external: true
 

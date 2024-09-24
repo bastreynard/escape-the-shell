@@ -2,16 +2,14 @@
 #
 # This file greets the user and gives instructions.
 #
-
-echo "Hello dear friend. Thanks for joining forces with our team to clean up" \
-     "the mess after those crackers broke into our system." \
-     "Our team is working on the damage as well and will lend you a hand in" \
-     "need."
-echo "Your first challenge has already begun."
+echo -e "$(cat /usr/f.ascii)"
+echo "Hello dear friend."
+echo "You made it this far, congratulations ! But I hope you didn't expect it to be that easy did you ?"
+echo "The next rendez-vous location of the hacking society's gathering might be in this system ! What a bunch of morons..."
 echo "The hacker has infiltrated the system you are on." \
      "Do not trust that this computer is friendly." \
      "We think that the attacker is mocking us and left the name of the" \
-     "collective as we found other files with the word \"r4""ven\" in them." \
+     "collective as we found other files with the word \"f""society\" in them." \
      "We suggest you look around this computer and rid it of the infected"\
      "files."
 echo "Good Luck!"
@@ -25,10 +23,10 @@ function challengeStatusShort() {
 	local max
 	filesInfected=0
 	max="?"
-	if grep -q 'r''4ven' ~/.bashrc 2>>/dev/null; then
+	if grep -q 'f''society' ~/.bashrc 2>>/dev/null; then
 		filesInfected="$(( filesInfected + 1 ))"
 	fi
-	if grep -q 'r''4ven' /etc/init.d/r""4ven 2>>/dev/null; then
+	if grep -q 'f''society' /etc/init.d/f""society 2>>/dev/null; then
 		filesInfected="$(( filesInfected + 1 ))"
 	fi
 	if ls -la /root 2>>/dev/null | grep -q .bashrc; then
@@ -38,13 +36,6 @@ function challengeStatusShort() {
 	if [ "$filesFound" -ge 2 ]; then
 	  max="3"
 	fi
-	echo -n "challenge $filesFound/$max"
-	if [ "$filesInfected" == "0" ]; then
-	  echo " type nextChallenge"
-	fi
+	echo -n "e-corp $filesFound/$max"
 	return "$filesInfected"
-}
-
-function nextChallenge() {
-	echo "TODO: instructions for the next challenge"
 }
