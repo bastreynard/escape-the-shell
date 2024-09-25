@@ -127,28 +127,37 @@ function challengeStatusShort() {
 # __challengeStatusPS1() prints the challenge status using
 # challengeStatusShort().
 function __challengeStatusPS1() {
-  # return code from assignment
-  # see https://stackoverflow.com/a/42965336
-  # color codes in bash
-  # see https://stackoverflow.com/a/5947802/1320237
-  local line
-  local returnCode
-	remaining="$(gprogress remaining)"
-	if [ "$remaining" == "0" ]; then
-		echo -ne "$1" # green
-        echo "System is clean ! But we found a weird 'md5' binary that does not at all do what it should be doing (?)"
-	else
-		echo -ne "$2" # red
-	fi
-    echo -n "e-corp $(gprogress status)/$(gprogress max) "
-	echo -ne $line $USER "$3" # no color
+    # return code from assignment
+    # see https://stackoverflow.com/a/42965336
+    # color codes in bash
+    # see https://stackoverflow.com/a/5947802/1320237
+    local line
+    local returnCode
+    remaining="$(gprogress remaining)"
+    step="$(gprogress get_step)"
+    if [ "$step" == "3" ]; then
+        echo -ne "$1" # green
+        echo "Congratulations, friend. Your adventure is over, for now..."
+        line="winner"
+    else
+        if [ "$remaining" == "0" ]; then
+            echo -ne "$2" # yellow
+            gprogress step2_init
+            cd /home/elliot
+            line="e-corp @ "
+        else
+            echo -ne "$3" # red
+            line="e-corp $(gprogress status)/$(gprogress max) "
+        fi
+    fi
+    echo -ne $line $USER "$4" # no color
 }
 # 
 # Using a command in side a bash prompt
 # see https://stackoverflow.com/a/24716445
 # Having \ escapes with different meanings
 # see https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
-export PS1='$( __challengeStatusPS1 "\[\e[1;32m\]" "\[\e[1;31m\]" "\[\e[0m\]" )\[\033[01;34m\]\w\[\033[00m\]\$ '
+export PS1='$( __challengeStatusPS1 "\[\e[1;32m\]" "\[\e[1;33m\]" "\[\e[1;31m\]" "\[\e[0m\]" )\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 
 

@@ -2,10 +2,9 @@
 #
 # This file greets the user and gives instructions.
 #
-echo -e "$(cat /usr/f.ascii)"
+
 echo "Hello dear friend."
 echo "You made it this far, congratulations ! But I hope you didn't expect it to be that easy did you ?"
-echo "The next rendez-vous location of the hacking society's gathering might be in this system ! What a bunch of morons..."
 echo "The hacker has infiltrated the system you are on." \
      "Do not trust that this computer is friendly." \
      "We think that the attacker is mocking us and left the name of the" \

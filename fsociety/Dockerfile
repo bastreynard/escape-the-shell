@@ -2,8 +2,17 @@ FROM sspreitzer/shellinabox:latest
 
 RUN apt-get update && apt-get install -y openssh-server sudo nano man
 COPY fsociety/bash.bashrc /etc/profile
-COPY fsociety/f.ascii /usr/f.ascii
 RUN mkdir /var/run/sshd
+
+#
+# Prepare motd
+#
+RUN chmod -x /etc/update-motd.d/*
+RUN echo '#!/bin/bash\n' \
+    'echo -e "$(cat /usr/f.ascii)"' \
+    > /etc/update-motd.d/01-custom
+RUN chmod +x /etc/update-motd.d/01-custom
+RUN chmod 777 /etc/update-motd.d/01-custom
 
 #
 # Create the user the hacker used to login.
@@ -34,15 +43,16 @@ RUN cat /etc/profile1 >> /etc/profile && rm /etc/profile1
 COPY fsociety/infected.bashrc /root/.bashrc
 COPY fsociety/infected.bashrc /home/elliot/.bashrc
 COPY fsociety/infected.file /etc/init.d/fsociety
+COPY fsociety/f.ascii /usr/f.ascii
+COPY fsociety/f.ascii /usr/motd.bck
 
 #
-# Encrypt success message
+# Encrypt message for step 2
 #
-COPY fsociety/scripts/success.txt /usr/success.txt
-RUN cat /usr/success.txt | openssl enc -aes-256-cbc -a -salt -pass pass:XER0 -pbkdf2 -iter 100000 > /usr/.success.txt
-# Copy the success decryption binary
-COPY fsociety/scripts/build/md5 /usr/bin/md5
-RUN chmod +x /usr/bin/md5 && rm /usr/success.txt
+COPY fsociety/success.txt /usr/success.txt
+RUN cat /usr/success.txt | openssl enc -aes-256-cbc -salt -pass pass:XER0 > /usr/.2.txt
+RUN rm /usr/success.txt
+
 # Copy the progress binary
 COPY fsociety/scripts/build/gprogress /usr/bin/gprogress
 

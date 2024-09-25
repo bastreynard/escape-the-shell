@@ -1,0 +1,8 @@
+
+"'\033[0;32m' 
+Your incredible skills will be useful for the dark future that lies ahead...
+Let's talk about your talents @ the Café des Grand-Places on friday 1215 ;-)
+
+Type 'gprogress i_escaped_the_shell'
+
+‘\033[0m’"
