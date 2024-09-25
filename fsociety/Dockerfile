@@ -13,7 +13,7 @@ RUN echo 'elliot:fsociety1986' | chpasswd
 
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-EXPOSE 22
+
 EXPOSE 4200
 
 #
@@ -38,11 +38,13 @@ COPY fsociety/infected.file /etc/init.d/fsociety
 #
 # Encrypt success message
 #
-COPY fsociety/success/success.txt /usr/success.txt
-RUN cat /usr/success.txt | openssl enc -aes-256-cbc -a -salt -pass pass:toto1986 -pbkdf2 -iter 100000 > /usr/.success.txt
+COPY fsociety/scripts/success.txt /usr/success.txt
+RUN cat /usr/success.txt | openssl enc -aes-256-cbc -a -salt -pass pass:XER0 -pbkdf2 -iter 100000 > /usr/.success.txt
 # Copy the success decryption binary
-COPY fsociety/success/md5 /usr/bin/md5
+COPY fsociety/scripts/build/md5 /usr/bin/md5
 RUN chmod +x /usr/bin/md5 && rm /usr/success.txt
+# Copy the progress binary
+COPY fsociety/scripts/build/gprogress /usr/bin/gprogress
 
 #
 # Make sure we can check that the file exists.

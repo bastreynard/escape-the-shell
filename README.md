@@ -34,7 +34,7 @@ If you install the game for development, you can also use play the game.
     ```shell
     git clone https://github.com/niccokumzmann/escape-the-shell.git
     ```
-    Add a success.txt file in the `ada` directory with the text you wish to show when the game is over.
+    Add a success.txt file in the `scripts` directory with the text you wish to show when the game is over.
 3. [Install Docker][install-docker].
 4. [Install docker-compose][install-docker-compose].
 5. You can build the software from the current version you downloaded.

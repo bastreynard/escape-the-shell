@@ -14,28 +14,3 @@ echo "The hacker has infiltrated the system you are on." \
      "files."
 echo "Good Luck!"
 
-#
-# Replace the user feedback of the challenge status.
-#
-function challengeStatusShort() {
-	local filesInfected
-	local filesFound
-	local max
-	filesInfected=0
-	max="?"
-	if grep -q 'f''society' ~/.bashrc 2>>/dev/null; then
-		filesInfected="$(( filesInfected + 1 ))"
-	fi
-	if grep -q 'f''society' /etc/init.d/f""society 2>>/dev/null; then
-		filesInfected="$(( filesInfected + 1 ))"
-	fi
-	if ls -la /root 2>>/dev/null | grep -q .bashrc; then
-		filesInfected="$(( filesInfected + 1 ))"
-	fi
-	filesFound="$(( 3 - filesInfected ))"
-	if [ "$filesFound" -ge 2 ]; then
-	  max="3"
-	fi
-	echo -n "e-corp $filesFound/$max"
-	return "$filesInfected"
-}

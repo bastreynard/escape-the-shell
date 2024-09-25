@@ -133,14 +133,14 @@ function __challengeStatusPS1() {
   # see https://stackoverflow.com/a/5947802/1320237
   local line
   local returnCode
-	line="$(eval challengeStatusShort)"
-	returnCode="$?"
-	if [ "$returnCode" == "0" ]; then
+	remaining="$(gprogress remaining)"
+	if [ "$remaining" == "0" ]; then
 		echo -ne "$1" # green
         echo "System is clean ! But we found a weird 'md5' binary that does not at all do what it should be doing (?)"
 	else
 		echo -ne "$2" # red
 	fi
+    echo -n "e-corp $(gprogress status)/$(gprogress max) "
 	echo -ne $line $USER "$3" # no color
 }
 # 
