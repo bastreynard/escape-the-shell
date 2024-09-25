@@ -52,6 +52,7 @@ function step2_init() {
     cp /usr/.2.txt /home/elliot/.ecorp-encrypted.txt
     # Show message only once
     if [[ ! -f "/usr/share/status.2" ]]; then
+    timeout 5s cmatrix
     echo -e "System is clean. Congratulations, friend.\\r\\n"
     echo -e "It unlocked something, I see a new encrypted file that might hold sensitive informations about E-Corp.\\r\\n"
     echo -e "I wonder if we can find the key to decipher it, somewhere in the system...\\r\\n"

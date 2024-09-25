@@ -1,6 +1,9 @@
 FROM sspreitzer/shellinabox:latest
 
-RUN apt-get update && apt-get install -y openssh-server sudo nano man
+RUN apt-get update && apt-get install -y --no-install-recommends openssh-server sudo nano man apt-utils kmod
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+RUN apt-get install -y cmatrix-xfont locales gpm cmatrix
+
 COPY fsociety/bash.bashrc /etc/profile
 RUN mkdir /var/run/sshd
 
